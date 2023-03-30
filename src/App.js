@@ -1,69 +1,80 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import {Button, Card }from 'react-bootstrap';
+
+
+// import { getMovie } from './services/NewsDataApi';
+import Header from './components/Header';
+import About from './components/About';
+import Projects from './components/Projects';
+import Contact from './components/Contacts';
+import axios from "axios";
+// import NewsDataApi from "./services/NewsDataApi";
+//import MyPortfolio from "./components/PortfolioPic";
+// import Image from './PortfolioPic/pic-portfolio.jpg';
+// import pic-for-portfolio.jpg from "./components";
 
 
 function App() {
-  const [name, setName] = useState("Pawana(Paula)");
-  const [title, setTitle] = useState("Web Developer");
-  const [about, setAbout] = useState(
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo dui eget nisi euismod luctus. Aliquam tincidunt dolor mauris, eget gravida quam sodales et. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis ut ligula velit."
-  );
+ 
+  const [data, setData] = useState([])
+  const getNews =async () => {
+    
+    const res = await axios.get("https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=20717b0b07314318a23cdae8c3825502")
+      console.log(res.data)
+      const articles= res.data.articles.slice(0,3)
+      console.log(articles)
+      setData(articles)
+  }
+   useEffect(()=>{
+    getNews()
+   },[])
 
-  useEffect(() => {
-    document.title = `${name} | Portfolio`;
-  }, []);
+   
 
   return (
-    <div className="App">
-      <header>
-        <h1>{name}</h1>
-        <h2>{title}</h2>
-      </header>
+    <div>
+      <Header />
       <main>
-        <section>
-       
-          <h3>About Me</h3>
-          <p>{about}</p>
-        </section>
-            {/* <img className="img" src="pic-for-portfolio.jpg" width="200" height="200"></img> */}
-        <section>
-     
-          <h3>Skills</h3>
-          <ul>
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
-            <li>React</li>
-          </ul>
-        </section>
-        <section>
-          <h3>Projects</h3>
-          <ul>
-            <li>
-              <a href="#">Project 1</a>
-            </li>
-            <li>
-              <a href="#">Project 2</a>
-            </li>
-            <li>
-              <a href="#">Project 3</a>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <h3>Contact Me</h3>
-          <ul>
-            <li>Email: panna.na@gmail.com</li>
-            <li>Phone: 4436301829</li>
-            <li>
-              LinkedIn:{" "}
-              <a href="#">link to LinkedIn</a>
-            </li>
-          </ul>
-        </section>
+        <About />
+        <Projects />
+        <Contact />
       </main>
-    </div>
-  );
-}
 
+
+      <div className="container">
+        <button className="btn" onClick={getNews}>click for News</button>
+      </div>
+
+
+      <div className="container1">
+        <div className="row">
+          {
+            data.map((value) => {
+              return (
+                <div className="col-3">
+                  <Card style={{ width: '15rem' }}>
+                    <Card.Img variant="top" src="value.urlToImage" />
+                    <Card.Body>
+                      <Card.Title>{value.title}</Card.Title>
+                
+                      <Card.Text>{value.description} </Card.Text>
+                      <Button variant="primary">click for more </Button>
+                    </Card.Body>
+                  </Card>
+                </div>
+              )
+            })
+          }
+
+        </div>
+
+      </div>
+    </div>
+
+
+
+  )
+};
 export default App;
+
