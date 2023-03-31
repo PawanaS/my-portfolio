@@ -84,12 +84,15 @@ button[type="submit"] {
   
 }
 .container{
-  /* color: darkcyan; */
-  background-image: ;
+  color: darkcyan;
+ 
 }
 
 .container1{
   text-align: center;
   background-color: rgb(143, 143, 170);
+}
+.row{
+  background-color:rgb(220, 220, 231);
 }
 

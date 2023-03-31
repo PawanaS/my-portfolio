@@ -60,10 +60,10 @@ function App() {
       <div className="container2" >
         <div className="row">
           {
-            data.map((value) => {
+            data.map((value,i) => {
               return (
-                <div className="col-3">
-                  <Card style={{ width: '15rem' }}>
+                <div className="col-3"key={i}>
+                  <Card style={{ width: '18rem' }}>
                     <Card.Img variant="top" src={value.urlToImage} />
                     <Card.Body className="bg-light">
                       <Card.Title>{value.title}</Card.Title>
