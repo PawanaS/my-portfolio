@@ -2,6 +2,9 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
+  
+  
+  
 }
 
 header {
@@ -70,7 +73,23 @@ button[type="submit"] {
   border-radius: 5px;
   cursor: pointer;
 }
-/* .btn {
-  padding: 100px;
-  margin-left: 300px;
-  margin-bottom: 50px; */
+
+  main {
+/* background-color: rgb(198, 237, 238);
+  */
+  background-image: url("./components/image.jpg");
+  background-size: 1600px 800px;
+  background-repeat: no-repeat;
+
+  
+}
+.container{
+  /* color: darkcyan; */
+  background-image: ;
+}
+
+.container1{
+  text-align: center;
+  background-color: rgb(143, 143, 170);
+}
+

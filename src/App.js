@@ -1,28 +1,34 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import {Button, Card }from 'react-bootstrap';
-
-
-// import { getMovie } from './services/NewsDataApi';
+// import {image} from './components/image.jpg';
+// import { getNews } from './services/NewsDataApi';
 import Header from './components/Header';
 import About from './components/About';
 import Projects from './components/Projects';
 import Contact from './components/Contacts';
 import axios from "axios";
+// import { Link } from 'react-router-dom';
 // import NewsDataApi from "./services/NewsDataApi";
-//import MyPortfolio from "./components/PortfolioPic";
-// import Image from './PortfolioPic/pic-portfolio.jpg';
-// import pic-for-portfolio.jpg from "./components";
 
+
+//---props has no use here---
+// function App(props) {
+//   const  [data, setData] = useState([])
+// console.log(props)
 
 function App() {
  
+
   const [data, setData] = useState([])
+
+  
+   
   const getNews =async () => {
     
     const res = await axios.get("https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=20717b0b07314318a23cdae8c3825502")
       console.log(res.data)
-      const articles= res.data.articles.slice(0,3)
+      const articles= res.data.articles.slice(0,4)
       console.log(articles)
       setData(articles)
   }
@@ -36,26 +42,30 @@ function App() {
     <div>
       <Header />
       <main>
+        <div>
+          {/* <img src={image} alt="my image" /> */}
+        
+        </div>
         <About />
         <Projects />
         <Contact />
       </main>
 
 
-      <div className="container">
-        <button className="btn" onClick={getNews}>click for News</button>
-      </div>
+      <div className="container1"> 
+      <button className="btn" onClick={getNews}>Check out the latest News around the world </button>
+      </div>  
+      
 
-
-      <div className="container1">
+      <div className="container2" >
         <div className="row">
           {
             data.map((value) => {
               return (
                 <div className="col-3">
                   <Card style={{ width: '15rem' }}>
-                    <Card.Img variant="top" src="value.urlToImage" />
-                    <Card.Body>
+                    <Card.Img variant="top" src={value.urlToImage} />
+                    <Card.Body className="bg-light">
                       <Card.Title>{value.title}</Card.Title>
                 
                       <Card.Text>{value.description} </Card.Text>
