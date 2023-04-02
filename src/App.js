@@ -21,8 +21,11 @@ function App() {
  
 
   const [data, setData] = useState([])
-
+  const [buttonClicked, setButtonClicked] = useState(false);
   
+  const handleButtonClick = () => {
+    setButtonClicked(true);
+  };
    
   const getNews =async () => {
     
@@ -33,11 +36,11 @@ function App() {
       setData(articles)
   }
    useEffect(()=>{
+    if (buttonClicked)
     getNews()
-   },[])
+   },[buttonClicked])
 
    
-
   return (
     <div>
       <Header />
@@ -52,15 +55,17 @@ function App() {
       </main>
 
 
+
+
       <div className="container1"> 
-      <button className="btn" onClick={getNews}>Check out the latest News around the world </button>
+      <button className="btn" onClick={handleButtonClick}>Check out the latest News around the world </button>
       </div>  
       
 
       <div className="container2" >
         <div className="row">
           {
-            data.map((value,i) => {
+           buttonClicked && data.map((value,i) => {
               return (
                 <div className="col-3"key={i}>
                   <Card style={{ width: '18rem' }}>
